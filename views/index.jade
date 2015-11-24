@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 온라인 설문지 서비스
+  a.btn.btn-success.btn-lg.btn-block(href='/survey') 설문지 만들기
+  ul
+    li
+      a(href='/signin') Signin
+    li
+      a(href='/signup') Signup

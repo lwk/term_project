@@ -4,6 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var methodOverride = require('method-override');
+var flash = require('connect-flash');
+var mongoose   = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -13,6 +17,10 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// mongodb connect
+mongoose.connect('mongodb://Kyu:asdasd@ds045604.mongolab.com:45604/leewankyu927');
+mongoose.connection.on('error', console.log);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
