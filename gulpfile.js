@@ -5,10 +5,11 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var nodemon = require('gulp-nodemon');
+var concat = require('gulp-concat');
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src(['app.js', 'routes/**/*.js', 'models/**/*.js'])
+    return gulp.src(['app.js', 'routes/**/*.js', 'models/**/*.js', 'config/**/*.js', 'public/javascripts/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -17,6 +18,7 @@ gulp.task('lint', function() {
 gulp.task('sass', function() {
     return gulp.src(['scss/*.scss'])
         .pipe(sass())
+        .pipe(concat('style.css'))
         .pipe(gulp.dest('public/stylesheets'));
 });
 
