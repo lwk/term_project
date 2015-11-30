@@ -26,10 +26,10 @@ router.get('/new', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var post = new Post({
-    email: req.body.email,
-    password: req.body.password,
     title: req.body.title,
-    content: req.body.content
+    explanation: req.body.explanation,
+    password: req.body.password,
+    //content: req.body.content
   });
   post.save(function(err, doc) {
     if (err) {
@@ -68,9 +68,9 @@ router.put('/:id', function(req, res, next) {
       return next(err);
     }
     if (req.body.password === post.password) {
-      post.email = req.body.email;
       post.title = req.body.title;
-      post.content = req.body.content;
+      post.explanation = req.body.explanation;
+      //post.content = req.body.content;
       post.save(function(err) {
         res.redirect('/posts/' + req.params.id);
       });

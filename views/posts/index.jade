@@ -16,9 +16,9 @@ block content
       tbody
         each post in posts
           tr
-            td= post.email
             td
               a(href='/posts/#{post.id}')= post.title
+            td= post.explanation
             td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
             //td= post.read
             td
@@ -26,6 +26,7 @@ block content
               | 
               a.btn.btn-xs.btn-default(data-id=post.id, class='delete') 삭제
 
+    hr
     a.btn.btn-primary(href='/posts/new') 추가
 
     //- 아래의 Pagination 부분은 만들 수 있다면 추가 점수 부여합니다. 

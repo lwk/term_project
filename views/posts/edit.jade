@@ -9,19 +9,21 @@ block content
 
     form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
       .form-group
-        label(for='email') 설문의 제목
-        input.form-control(type='text', id='email', name='email', placeholder='Title', value=post.email)
+        label(for='title') 설문의 제목
+        input.form-control(type='text', id='title', name='title', placeholder='Title', value=post.title)
       .form-group
-        label(for='title') 전체 설명
-        input.form-control(type='text', id='title', name='title', placeholder='Explanation', value=post.title)
+        label(for='explanation') 전체 설명
+        input.form-control(type='text', id='explanation', name='explanation', placeholder='Explanation', value=post.explanation)
       .form-group
         label(for='password') Password
         input.form-control(type='password', id='password', name='password', placeholder='Password')
-      .form-group
-        label(for='content') Content
-        textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= post.content
+        
 
         hr
         a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
         | 
         button.btn.btn-primary(type='submit') 완료
+
+      //.form-group
+        //label(for='content') Content
+        //textarea.form-control(id='content', rows='10', name='content', placeholder='content here')= post.content
