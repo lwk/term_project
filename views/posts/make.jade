@@ -3,3 +3,77 @@ extends ../layout
 block content
   .container
     h1.page-header 설문지 제작
+    span#sub
+      button.btn.btn-primary.btn-lg(type='button') 부제목 추가
+    span#multi
+      button.btn.btn-primary.btn-lg(type='button') 객관식 추가
+    span#short
+      button.btn.btn-primary.btn-lg(type='button') 단답형 추가
+    span#long
+      button.btn.btn-primary.btn-lg(type='button') 장문형 추가
+
+    hr
+    script#addsub(type="text/template").
+      <tr>
+        <td><input type='checkbox'></td>
+        <td><input type='text' size='15'></td>
+        <td><input type='text' size='10' class='unit-price'></td>
+        <td>
+          <select class='qty'>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </td>
+        <td align="right"><span class='price'></span></td>
+      </tr>
+    script#addmulti(type="text/template")
+      option 11
+    script#addshort(type="text/template")
+      table
+        thead
+          tr
+            th ㅇ
+        tbody
+          tr
+            td ㅇ        
+    script#addlong(type="text/template")
+      table
+        thead
+          tr
+            th ㅇ
+        tbody
+          tr
+            td ㅇ
+
+block footer
+  .container
+    #survey
+      p
+      tr
+        td <input type='checkbox'></td>
+        td <input type='text' size='15'></td>
+        td <input type='text' size='10' class='unit-price'></td>
+        td 
+          select class='qty'>
+            option 1</option>
+            option 2</option>
+            option 3</option>
+            option 4</option>
+            option 5</option>
+            option 6</option>
+            option 7</option>
+            option 8</option>
+            option 9</option>
+            option 10</option>
+          td align="right"><span class='price'></span></td>
+      button#del(type="button") 물품삭제 
+      
+    

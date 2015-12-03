@@ -39,6 +39,10 @@ router.post('/', function(req, res, next) {
   });
 });
 
+//router.get('/make', function(req, res, next) {
+  //res.render('posts/make', {task: {}});
+//});
+
 router.get('/:id', function(req, res, next) {
   Post.findById(req.params.id, function(err, post) {
     if (err) {
@@ -50,6 +54,15 @@ router.get('/:id', function(req, res, next) {
       res.render('posts/show', {post: post});
     }
     return next(new Error('not found'));
+  });
+});
+
+router.get('/:id/make', function(req, res, next) {
+  Post.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.render('posts/make', {post: post});
   });
 });
 
