@@ -1,5 +1,6 @@
 var express = require('express'),
-    Post = require('../models/Post');
+    Post = require('../models/Post'),
+    Quest = require('../models/Quest');
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -62,7 +63,32 @@ router.get('/:id/make', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('posts/make', {post: post});
+    Quest.find({post: post.id}, function(err, quests) {
+      if (err) {
+        return next(err);
+      }
+      res.render('posts/make', {post: post, quests: quests});
+    });
+  });
+});
+
+router.post('/:id/make', function(req, res, next) {
+  var quest = new Quest({
+    post: req.params.id,
+    question: req.body.question,
+    answer: req.body.answer
+  });
+
+  quest.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndUpdate(req.params.id, {$inc: {numQuest: 1}}, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/posts/' + req.params.id + '/make');
+    });
   });
 });
 
@@ -100,6 +126,8 @@ router.delete('/:id', function(req, res, next) {
     res.redirect('/posts/');
   });
 });
+
+
 function pagination(count, page, perPage, funcUrl) {
   var pageMargin = 3;
   var firstPage = 1;

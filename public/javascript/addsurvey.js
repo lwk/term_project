@@ -1,6 +1,6 @@
 function addsurveysub() {
 	$('#sub').click(function() {
-		$("#survey p").append($('#addsub').html());
+		$("#survey").append($('#addsub').html());
 	});
 	$('#del').click(function() {
 		if (confirm("정말 삭제하시겠습니까?")) {
@@ -10,7 +10,7 @@ function addsurveysub() {
       });
 		}
 	});
-	$('#add').click();
+	$('#sub').click();
 }
 function addsurveymulti() {
 	$('#multi').click(function() {
@@ -24,7 +24,7 @@ function addsurveymulti() {
       });
 		}
 	});
-	$('#add').click();
+	$('#multi').click();
 }
 
 function addsurveyshort() {
@@ -39,7 +39,7 @@ function addsurveyshort() {
       });
 		}
 	});
-	$('#add').click();
+	$('#short').click();
 }
 
 function addsurveylong() {
@@ -54,5 +54,5 @@ function addsurveylong() {
       });
 		}
 	});
-	$('#add').click();
+	$('#long').click();
 }

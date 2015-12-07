@@ -3,77 +3,73 @@ extends ../layout
 block content
   .container
     h1.page-header 설문지 제작
-    span#sub
-      button.btn.btn-primary.btn-lg(type='button') 부제목 추가
-    span#multi
-      button.btn.btn-primary.btn-lg(type='button') 객관식 추가
-    span#short
-      button.btn.btn-primary.btn-lg(type='button') 단답형 추가
-    span#long
-      button.btn.btn-primary.btn-lg(type='button') 장문형 추가
-
+    p
+      b by #{post.title}
+      | 
+      span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
+      | 
+      | (조회수 #{post.read})
+    p.well(style='white-space:pre;')= post.explanation
+    
     hr
-    script#addsub(type="text/template").
-      <tr>
-        <td><input type='checkbox'></td>
-        <td><input type='text' size='15'></td>
-        <td><input type='text' size='10' class='unit-price'></td>
-        <td>
-          <select class='qty'>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-          </select>
-        </td>
-        <td align="right"><span class='price'></span></td>
-      </tr>
-    script#addmulti(type="text/template")
-      option 11
-    script#addshort(type="text/template")
-      table
-        thead
-          tr
-            th ㅇ
-        tbody
-          tr
-            td ㅇ        
-    script#addlong(type="text/template")
-      table
-        thead
-          tr
-            th ㅇ
-        tbody
-          tr
-            td ㅇ
-
+    h3 설문
+    table.table
+      tr
+        th 질문
+        th 답변
+        //th time
+        
+      each quest in quests
+        tr
+          td= quest.question
+          td= quest.answer
+          //td= moment(quest.createdAt).format('YYYY/MM/DD')
+          
+    
+    hr
+    form.form-inline(action='/posts/' + post._id + '/make', method='POST')
+      .form-group
+        label.sr-only(for='question') question
+        input.form-control(name='question', size=70, placeholder='question')
+      .form-group
+        label.sr-only(for='answer') answer
+        input.form-control(name='answer', placeholder='answer')
+      button.btn.btn-primary 부제목 추가
+    
+    hr
+    form.form-inline(action='/posts/' + post._id + '/quests', method='POST')
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', size=70, placeholder='question')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', placeholder='answer')
+      button.btn.btn-primary 객관식 추가
+    
+    hr  
+    form.form-inline(action='/posts/' + post._id + '/quests', method='POST')
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', size=70, placeholder='question')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', placeholder='answer')
+      button.btn.btn-primary 단답형 추가
+    
+    hr  
+    form(action='/posts/' + post._id + '/quests', method='POST')
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', size=70, placeholder='question')
+      .form-group
+        label.sr-only(for='content') content
+        textarea.form-control(name='content', rows='5', placeholder='answer')
+      button.btn.btn-primary 장문형 추가
+    
 block footer
   .container
     #survey
-      p
-      tr
-        td <input type='checkbox'></td>
-        td <input type='text' size='15'></td>
-        td <input type='text' size='10' class='unit-price'></td>
-        td 
-          select class='qty'>
-            option 1</option>
-            option 2</option>
-            option 3</option>
-            option 4</option>
-            option 5</option>
-            option 6</option>
-            option 7</option>
-            option 8</option>
-            option 9</option>
-            option 10</option>
-          td align="right"><span class='price'></span></td>
-      button#del(type="button") 물품삭제 
       
+    hr  
+    a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
     
