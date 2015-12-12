@@ -4,19 +4,18 @@ var mongoose = require('mongoose'),
 
 var schema = new Schema({
   post: {type: Schema.Types.ObjectId, required: true, trim: true},
-  type: {type: String, trim: true},
   question: {type: String, required: true, trim: true},
-  answer: {type: String, trim: true},
-  answer1: {type: String},
-  answer2: {type: String},
-  answer3: {type: String},
-  answer4: {type: String},
-  answer5: {type: String}
+  answer1: {type: Number, trim: true},
+  answer2: {type: Number, trim: true},
+  answer3: {type: Number, trim: true},
+  answer4: {type: Number, trim: true},
+  answer5: {type: String, trim: true},
+  createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: {virtuals: true},
   toObject: {virtuals: true}
 });
 
-var Quest = mongoose.model('Quest', schema);
+var Multi = mongoose.model('Multi', schema);
 
-module.exports = Quest;
+module.exports = Multi;

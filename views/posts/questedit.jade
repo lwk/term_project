@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  .container
+    h1.page-header 설문지 제작
+    p
+      b by #{post.title}
+      | 
+      span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
+      | 
+      | (조회수 #{post.read})
+    p.well(style='white-space:pre;')= post.explanation
+    
+    hr
+    h3 현재 설문
+    table.table
+      tr
+        th 질문
+        th 유형
+        //th time
+        th
+        
+      each quest in quests
+        tr
+          td= quest.question
+          td= quest.type
+          //td= moment(quest.createdAt).format('YYYY/MM/DD')
+          td
+          
+    hr
+    h3 수정
+    table.table
+      tr
+        th 질문
+        th 유형
+        //th time
+        th
+        
+      each quest in quests
+        tr
+          td
+            form(action='/posts/' + post._id + '/make/questedit', method='PUT')
+              .form-group
+                label.sr-only(for='question') question
+                input.form-control(name='question', placeholder='question')
+          td= quest.type
+          //td= moment(quest.createdAt).format('YYYY/MM/DD')
+          td
+            button.btn.btn-primary.btn-sm(type='submit') 저장
+    hr  
+    a.btn.btn-default(href='/posts/#{post.id}/make') 뒤로 

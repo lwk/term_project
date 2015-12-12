@@ -16,60 +16,73 @@ block content
     table.table
       tr
         th 질문
-        th 답변
+        th 유형
         //th time
+        th
         
       each quest in quests
         tr
           td= quest.question
-          td= quest.answer
+          td= quest.type
           //td= moment(quest.createdAt).format('YYYY/MM/DD')
-          
-    
-    hr
-    form.form-inline(action='/posts/' + post._id + '/make', method='POST')
+          td 
+            a.btn.btn-xs.btn-default(href='/posts/#{quest._id}/quest?_method=DELETE') 삭제
+            
+    a.btn.btn-default.btn-sm(href='/posts/#{post.id}/make/questedit') 질문 수정
+      
+    form(action='/posts/' + post._id + '/make', method='POST')
+      hr
+      mark 객관식      
       .form-group
         label.sr-only(for='question') question
-        input.form-control(name='question', size=70, placeholder='question')
+        input.form-control(name='question', placeholder='question')
+        input.form-control(name='type', type='hidden', value='객관식')
       .form-group
         label.sr-only(for='answer') answer
-        input.form-control(name='answer', placeholder='answer')
-      button.btn.btn-primary 부제목 추가
-    
-    hr
-    form.form-inline(action='/posts/' + post._id + '/quests', method='POST')
+        span 1.
+        input(name='answer1', placeholder='answer1')
+        ensp
+        span 2.
+        input(name='answer2', placeholder='answer2')
+        ensp
+        span 3.
+        input(name='answer3', placeholder='answer3')
+        ensp
+        span 4.
+        input(name='answer4', placeholder='answer4')
+        ensp
+        span 5.
+        input(name='answer5', placeholder='answer5')
+        
+      button.btn.btn-primary.btn-sm(type='submit') 추가
+
+    form(action='/posts/' + post._id + '/make', method='POST')
+      hr
+      mark 단답형
       .form-group
-        label.sr-only(for='email') email
-        input.form-control(name='email', size=70, placeholder='question')
+        label.sr-only(for='question') question
+        input.form-control(name='question', placeholder='question')
+        input.form-control(name='type', type='hidden', value='단답형')
       .form-group
-        label.sr-only(for='content') content
-        input.form-control(name='content', placeholder='answer')
-      button.btn.btn-primary 객관식 추가
-    
-    hr  
-    form.form-inline(action='/posts/' + post._id + '/quests', method='POST')
+        label.sr-only(for='answer') answer
+      button.btn.btn-primary.btn-sm(type='submit') 추가    
+      
+    form(action='/posts/' + post._id + '/make', method='POST')
+      hr
+      mark 장문형
       .form-group
-        label.sr-only(for='email') email
-        input.form-control(name='email', size=70, placeholder='question')
+        label.sr-only(for='question') question
+        input.form-control(name='question', placeholder='question')
+        input.form-control(name='type', type='hidden', value='장문형')
       .form-group
-        label.sr-only(for='content') content
-        input.form-control(name='content', placeholder='answer')
-      button.btn.btn-primary 단답형 추가
-    
-    hr  
-    form(action='/posts/' + post._id + '/quests', method='POST')
-      .form-group
-        label.sr-only(for='email') email
-        input.form-control(name='email', size=70, placeholder='question')
-      .form-group
-        label.sr-only(for='content') content
-        textarea.form-control(name='content', rows='5', placeholder='answer')
-      button.btn.btn-primary 장문형 추가
-    
+        label.sr-only(for='answer') answer
+      button.btn.btn-primary.btn-sm(type='submit') 추가   
+                
 block footer
   .container
     #survey
-      
+    
     hr  
-    a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+    a.btn.btn-default(href='/posts') 뒤로 
+      
     
