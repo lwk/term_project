@@ -12,7 +12,7 @@ function needAuth(req, res, next) {
     }
 }
 
-
+// GET post
 router.get('/', needAuth, function(req, res, next) {
   Post.find({}, function(err, posts) {
     if (err) {
@@ -30,7 +30,7 @@ router.post('/', needAuth, function(req, res, next) {
   var post = new Post({
     title: req.body.title,
     explanation: req.body.explanation,
-    password: req.body.password,
+    //password: req.body.password,
     //content: req.body.content
   });
   post.save(function(err, doc) {
@@ -45,6 +45,7 @@ router.post('/', needAuth, function(req, res, next) {
   //res.render('posts/make', {task: {}});
 //});
 
+// GET post title and explanation
 router.get('/:id', needAuth, function(req, res, next) {
   Post.findById(req.params.id, function(err, post) {
     if (err) {
@@ -59,6 +60,7 @@ router.get('/:id', needAuth, function(req, res, next) {
   });
 });
 
+// MAKE quest
 router.get('/:id/make', needAuth, function(req, res, next) {
   Post.findById(req.params.id, function(err, post) {
     if (err) {
@@ -99,7 +101,7 @@ router.post('/:id/make', needAuth, function(req, res, next) {
   });
 });
 
-
+// EDIT post
 router.get('/:id/edit', needAuth, function(req, res, next) {
   Post.findById(req.params.id, function(err, post) {
     if (err) {
@@ -109,6 +111,21 @@ router.get('/:id/edit', needAuth, function(req, res, next) {
   });
 });
 
+router.put('/:id', needAuth, function(req, res, next) {
+  Post.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    post.title = req.body.title;
+    post.explanation = req.body.explanation;
+    //post.content = req.body.content;
+    post.save(function(err) {
+      res.redirect('/posts/');
+    });
+  });
+});
+
+// EDIT quest
 router.get('/:id/make/questedit', needAuth, function(req, res, next) {
   Post.findById(req.params.id, function(err, post) {
     if (err) {
@@ -120,23 +137,6 @@ router.get('/:id/make/questedit', needAuth, function(req, res, next) {
       }
       res.render('posts/questedit', {post: post, quests: quests});
     });
-  });
-});
-
-router.put('/:id', needAuth, function(req, res, next) {
-  Post.findById(req.params.id, function(err, post) {
-    if (err) {
-      return next(err);
-    }
-    if (req.body.password === post.password) {
-      post.title = req.body.title;
-      post.explanation = req.body.explanation;
-      //post.content = req.body.content;
-      post.save(function(err) {
-        res.redirect('/posts/' + req.params.id);
-      });
-    }
-    res.redirect('back');
   });
 });
 
