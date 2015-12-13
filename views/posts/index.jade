@@ -10,7 +10,7 @@ block content
         tr
           th 설문의 제목
           th 전체 설명
-          th 날짜
+          th 설문 URL
           //th 조회수
           th
       tbody
@@ -20,7 +20,8 @@ block content
               a(href='/posts/#{post.id}/make')= post.title
               //a(href='/posts/make')= post.title
             td= post.explanation
-            td= moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')
+            td
+              a(href='/posts/#{post.id}/answer') 참여
             //td= post.read
             td
               a.btn.btn-xs.btn-default(href='/posts/#{post.id}/edit') 수정

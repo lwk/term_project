@@ -2,16 +2,9 @@ extends ../layout
 
 block content
   .container
-    h1.page-header 설문지 제작
-    p
-      b by #{post.title}
-      | 
-      span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
-      | 
-      | (조회수 #{post.read})
-    p.well(style='white-space:pre;')= post.explanation
+    h1.page-header 설문 수정
+
     
-    hr
     h3 현재 설문
     table.table
       tr
@@ -39,7 +32,7 @@ block content
       each quest in quests
         tr
           td
-            form(action='/posts/' + post._id + '/make/questedit', method='PUT')
+            form(action='/posts/' + post._id + 'questedit', method='PUT')
               .form-group
                 label.sr-only(for='question') question
                 input.form-control(name='question', placeholder='question')

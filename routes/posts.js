@@ -126,21 +126,16 @@ router.put('/:id', needAuth, function(req, res, next) {
 });
 
 // EDIT quest
-router.get('/:id/make/questedit', needAuth, function(req, res, next) {
-  Post.findById(req.params.id, function(err, post) {
+router.get('/:id/questedit', needAuth, function(req, res, next) {
+  Quest.findById(req.params.id, function(err, quest) {
     if (err) {
       return next(err);
     }
-    Quest.find({post: post.id}, function(err, quests) {
-      if (err) {
-        return next(err);
-      }
-      res.render('posts/questedit', {post: post, quests: quests});
-    });
+    res.render('posts/questedit', {quest: quest});
   });
 });
 
-router.put('/:id/make/questedit', needAuth, function(req, res, next) {
+router.put('/:id/questedit', needAuth, function(req, res, next) {
   Quest.findById(req.params.id, function(err, quest) {
     if (err) {
       return next(err);
@@ -178,6 +173,21 @@ router.delete('/:id/quest', needAuth, function(req, res, next) {
       return next(err);
     }
     res.redirect('/posts/' + quest.post + '/make');
+  });
+});
+
+// GET answer
+router.get('/:id/answer', needAuth, function(req, res, next) {
+  Post.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    Quest.find({post: post.id}, function(err, quests) {
+      if (err) {
+        return next(err);
+      }
+      res.render('posts/answer', {post: post, quests: quests});
+    });
   });
 });
 
