@@ -13,46 +13,48 @@ block content
     
     hr
     h3 설문
-    table.table
-      tr
-        th 질문
-        th 유형
-        //th time
-        th
-        
-      each quest in quests
+    form(action='/posts/' + post._id + '/answer', method='POST')
+      table.table
         tr
-          td= quest.question
-          td
-            if quest.type === '객관식'
-              p 객관식
-            if quest.type === '단답형'
-              p 단답형
-            if quest.type === '장문형'
-              p 장문형
-          //td= moment(quest.createdAt).format('YYYY/MM/DD')
-          td 
-            if quest.type === '객관식'
-              .form-group
-                label.sr-only(for='answer') answer
-                input(type='radio', name='answer', placeholder='answer1', value='1')
-                span= quest.answer1
-                ensp
-                input(type='radio', name='answer', placeholder='answer2', value='2')
-                span= quest.answer2
-                ensp
-                input(type='radio', name='answer', placeholder='answer3', value='3')
-                span= quest.answer3
-                ensp
-                input(type='radio', name='answer', placeholder='answer4', value='4')
-                span= quest.answer4
-                ensp
-                input(type='radio', name='answer', placeholder='answer5', value='5')
-                span= quest.answer5
-            if quest.type === '단답형'
-              input.form-control(name='answer', placeholder='answer')
-            if quest.type === '장문형'
-              textarea.form-control(name='answer', row="2", placeholder='answer')
+          th 질문
+          th 유형
+          //th time
+          th
+          
+        each quest in quests
+          tr
+            td= quest.question
+            td
+              if quest.type === '객관식'
+                p 객관식
+              if quest.type === '단답형'
+                p 단답형
+              if quest.type === '장문형'
+                p 장문형
+            //td= moment(quest.createdAt).format('YYYY/MM/DD')
+            td 
+              if quest.type === '객관식'
+                .form-group
+                  label.sr-only(for='answer') answer
+                  input(type='radio', name='answer1', placeholder='answer1', value='1')
+                  span= quest.answer1
+                  ensp
+                  input(type='radio', name='answer2', placeholder='answer2', value='2')
+                  span= quest.answer2
+                  ensp
+                  input(type='radio', name='answer3', placeholder='answer3', value='3')
+                  span= quest.answer3
+                  ensp
+                  input(type='radio', name='answer4', placeholder='answer4', value='4')
+                  span= quest.answer4
+                  ensp
+                  input(type='radio', name='answer5', placeholder='answer5', value='5')
+                  span= quest.answer5
+              if quest.type === '단답형'
+                input.form-control(name='answer', placeholder='answer')
+              if quest.type === '장문형'
+                textarea.form-control(name='answer', row="2", placeholder='answer')
+      button.btn.btn-primary(type='submit') 완료 
               
 block footer
   .container

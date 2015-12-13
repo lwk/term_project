@@ -1,6 +1,7 @@
 var express = require('express'),
     Post = require('../models/Post'),
     Quest = require('../models/Quest');
+    Multi = require('../models/Multi');
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -187,6 +188,31 @@ router.get('/:id/answer', needAuth, function(req, res, next) {
         return next(err);
       }
       res.render('posts/answer', {post: post, quests: quests});
+    });
+  });
+});
+
+// POST answer
+router.post('/:id/answer', needAuth, function(req, res, next) {
+  var multi = new Multi({
+    post: req.params.id,
+    answer: req.body.answer,
+    answer1: req.body.answer1,
+    answer2: req.body.answer2,
+    answer3: req.body.answer3,
+    answer4: req.body.answer4,
+    answer5: req.body.answer5
+  });
+
+  multi.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndUpdate(req.params.id, {$inc: {numQuest: 1}}, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.render('posts/complete');
     });
   });
 });
