@@ -1,6 +1,6 @@
 var express = require('express'),
     Post = require('../models/Post'),
-    Quest = require('../models/Quest');
+    Quest = require('../models/Quest'),
     Multi = require('../models/Multi');
 var router = express.Router();
 
